@@ -7,31 +7,44 @@
     <title>Timed Coding Quiz</title>
     <link rel="stylesheet" href="./assets/style.css"/>
 </head>
+
 <body>
     <header id="header"> 
         <div class="highScores">
             <a href="./assets/highscores.html">View high scores</a>
         </div>
-<!--  Look up how to do a timer interval do this firts then connect it the start button function-->
-        <div class="timer">
+<!--   connect timer interval with the start button function-->
+        <div id="timer"></div>
             Time <span id ="countdown">0</span>
         </div>
-       <h1>Timed Coding Quiz</h1>
        
-     
+        <h1>Timed Coding Quiz Challenge</h1>
+            <p>
+                Try to answer the following code-related questions within the time limit. Keep in mind that incorrect
+                answers will penalize yur score by ten seconds.
+            </p>
+       
+       <button id="start-btn" class="start-btn">Start Quiz</button>
     </header>
   
-<main>
-    <p>
-    </p>
+    <main>
+    
 <!-- Build a function when a user press start button quiz starts -->
-    <button type="button" class="start">Start</button> 
-    <button type="button" class="question1">Click Me!</button> 
-    <button type="button" class="question2">Click Me!</button> 
-    <button type="button" class="question3">Click Me!</button> 
-    <button type="button" class="question4">Click Me!</button> 
 
-</main>
+<div id ="quiz" class="container">
+
+    <p id="question"></p>
+    <div id="options">
+        <button id="option1"><span id="option2"></span></button>
+        <button id="option2"><span id="option2"></span></button>
+        <button id="option3"><span id="option2"></span></button>
+        <button id="option4"><span id="option2"></span></button>
+    </div>
+</div> 
+
+<!-- Make this button trigger at end of -->
+<button id="submit">Submit</button>
+    </main>
 <script src="./assets/script.js"></script>
 
 </body>
