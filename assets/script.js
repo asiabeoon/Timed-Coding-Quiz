@@ -1,30 +1,5 @@
-// var startButton = document.getElementsByClassName("start")[0]
 
-// var questionOne = document.getElementsByClassName("question1")[0]
-// var questionTwo = document.getElementsByClassName("question2")[0]
-// var questionThree =document.getElementsByClassName("question3")[0]
-// var questionFour=document.getElementsByClassName("question4")[0]
-
-// <button id="start-btn" onclick="startFunction()">Start</button> connect start to start of quiz
-
-// document.getElementById("start-btn").onclick = function() {;
-
-
-// // Add an event listener to the start button
-// startButton.addEventListener("click", () => {
-// 	// Hide the start button
-// 	startButton.classList.add("container");
-	
-// 	// Show the quiz div
-// 	quizData.classList.remove("container");
-	
-// 	// Load the first question
-// 	showQuestion(0);
-// });
-
-
-
-const quizData = [
+var quizData = [
     {
 		question: 'Which property is used to change the background color?',
 		options: ['background-color', 'bgcolor', 'color', 'backgroundcolor'],
@@ -63,22 +38,26 @@ const quizData = [
 
 ];
 // Get the start button element
-const startButton = document.getElementById("start-btn");
+var startButton = document.querySelector("#start");
 
 // Get the quiz container element
-const quizContainer = document.querySelector('.container');
+var quizContainer = document.querySelector('.container');
 
 // Get the question and options elements
-const questionElement = document.getElementById('question');
-const optionButtons = document.getElementById('options').querySelectorAll('button');
+var questionElement = document.getElementById('question');
+var optionButtons = document.getElementById('options').querySelectorAll('button');
 
-const timerElement = document.getElementById('timer');
-const submitButton = document.getElementById('submit');
+var timerElement = document.getElementById('timer');
+var submitButton = document.getElementById('submit');
 
 let currentQuestion = 0;
 let score = 0;
 let timeLeft = 60;
 let countdown;
+
+// start-btn.addEventListener ("click",startQuiz)
+// startQuiz();
+
 
 function startQuiz() {
 	showQuestion();
@@ -86,7 +65,7 @@ function startQuiz() {
 }
 
 function showQuestion() {
-	const question = quizData[currentQuestion];
+	var question = quizData[currentQuestion];
 	questionElement.textContent = question.question;
 	optionButtons.forEach((button, index) => {
 		button.textContent = question.options[index];
@@ -94,9 +73,10 @@ function showQuestion() {
 	});
 }
 
+
 function selectOption(event) {
-	const selectedButton = event.target;
-	const answer = quizData[currentQuestion].answer;
+	var selectedButton = event.target;
+	var answer = quizData[currentQuestion].answer;
 	if (selectedButton.textContent === answer) {
 		score++;
 	}
@@ -119,13 +99,34 @@ function startTimer() {
 	}, 1000);
 }
 
+
 function endQuiz() {
 	clearInterval(countdown);
+
 	quizContainer.innerHTML = `
-		<h2>You scored ${score} out of ${quizData.length}!</h2>
-		<button onclick="location.reload()">Try again</button>
+		<h2>All done!</h2> 
+		<p> Your final score is
+		${score} out of ${quizData.length}!</h2>
+		
+		<div>
+		<button onclick="location.reload()">Go Back</button>
+		
+		</div>
 	`;
 }
+
+// var initialsInput = document.querySelector("#initials");
+
+// 		enterInitials.addEventListener("click", function(event) {
+// 			event.preventDefault();
+
+// 		var user = {
+// 				initials: initialsInput.value.trim(),
+// 			  };
+
+// 			  localStorage.setItem("user", JSON.stringify(user));
+
+// 			});
 
 submitButton.addEventListener('click', endQuiz);
 

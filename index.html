@@ -15,16 +15,18 @@
         </div>
 <!--   connect timer interval with the start button function-->
         <div id="timer"></div>
-            Time <span id ="countdown">0</span>
+            <!-- Time <span id ="countdown">0</span> -->
         </div>
        
+        <div>
         <h1>Timed Coding Quiz Challenge</h1>
             <p>
                 Try to answer the following code-related questions within the time limit. Keep in mind that incorrect
-                answers will penalize yur score by ten seconds.
+                answers will penalize your score by ten seconds.
             </p>
        
-       <button id="start-btn" class="start-btn">Start Quiz</button>
+       <button id="start-btn" class="start">Start Quiz</button>
+        </div>
     </header>
   
     <main>
@@ -41,6 +43,11 @@
         <button id="option4"><span id="option2"></span></button>
     </div>
 </div> 
+
+<div class="input-group">
+    <label for="initials">Enter Initials </label>
+    <input type="text" name="initials" id="initials" placeholder="" />
+  </div>
 
 <!-- Make this button trigger at end of -->
 <button id="submit">Submit</button>
