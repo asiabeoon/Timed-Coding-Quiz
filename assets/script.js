@@ -37,8 +37,10 @@ var quizData = [
 	}
 
 ];
+
+
 // Get the start button element
-var startButton = document.querySelector("#start");
+var startButton = document.querySelector("#start-btn");
 
 // Get the quiz container element
 var quizContainer = document.querySelector('.container');
@@ -47,6 +49,7 @@ var quizContainer = document.querySelector('.container');
 var questionElement = document.getElementById('question');
 var optionButtons = document.getElementById('options').querySelectorAll('button');
 
+// Get the timer and submit elements
 var timerElement = document.getElementById('timer');
 var submitButton = document.getElementById('submit');
 
@@ -55,14 +58,19 @@ let score = 0;
 let timeLeft = 60;
 let countdown;
 
+var initialsInput = document.querySelector("#initials");
 // start-btn.addEventListener ("click",startQuiz)
 // startQuiz();
 
 
 function startQuiz() {
+	startButton.style.display = 'none'
+	console.log("I called the start quiz function")
 	showQuestion();
 	startTimer();
 }
+startButton.addEventListener('click', startQuiz);
+
 
 function showQuestion() {
 	var question = quizData[currentQuestion];
@@ -102,33 +110,44 @@ function startTimer() {
 
 function endQuiz() {
 	clearInterval(countdown);
+	
+			
+// area that stops quiz and removes questions
+// add coincactation after quizover by adding a plus sign plus whatever text i want to use ex All Done....
+// hide submit to end of quiz and once clicked hide it again = display none
+	quizContainer.innerHTML="quizOver" 
 
-	quizContainer.innerHTML = `
-		<h2>All done!</h2> 
-		<p> Your final score is
-		${score} out of ${quizData.length}!</h2>
+// 	quizContainer.innerHTML = `
+// 		<h2>All done!</h2> 
+// 		<p> Your final score is
+// 		${score} out of ${quizData.length}!</h2>
 		
-		<div>
-		<button onclick="location.reload()">Go Back</button>
 		
-		</div>
-	`;
-}
-
-// var initialsInput = document.querySelector("#initials");
-
 // 		enterInitials.addEventListener("click", function(event) {
 // 			event.preventDefault();
+// 		<div>
+// 		<button onclick="location.reload()">Go Back</button>
+		
+// 		</div>
+// 	`;
+ }
+function submitInitials () {
 
-// 		var user = {
-// 				initials: initialsInput.value.trim(),
-// 			  };
 
-// 			  localStorage.setItem("user", JSON.stringify(user));
+var initialsInput = document.querySelector("#initials");
 
-// 			});
+		// enterInitials.addEventListener("click", function(event) {
+		// 	event.preventDefault();
 
-submitButton.addEventListener('click', endQuiz);
+ 		var user = {
+				initials: initialsInput.value.trim(),
+ 			  };
+			   console.log("user", user)
+		  localStorage.setItem("user", JSON.stringify(user));
 
-startQuiz();
+		
+}
+submitButton.addEventListener('click', submitInitials);
+
+// startQuiz();
 
