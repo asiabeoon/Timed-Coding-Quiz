@@ -38,12 +38,13 @@ var quizData = [
 
 ];
 
-
+// Access opening quiz container
+var startContainer = document.querySelector('.start-container');
 // Get the start button element
 var startButton = document.querySelector("#start-btn");
 
 // Get the quiz container element
-var quizContainer = document.querySelector('.container');
+var quizContainer = document.querySelector('.quiz-container');
 
 // Get the question and options elements
 var questionElement = document.getElementById('question');
@@ -58,21 +59,28 @@ let score = 0;
 let timeLeft = 60;
 let countdown;
 
-var initialsInput = document.querySelector("#initials");
-// start-btn.addEventListener ("click",startQuiz)
-// startQuiz();
 
 
+// *Attempted funtion to not display input container on start page*
+// function quizOpener () {
+// 	inputContainer.style.display = 'none'
+// 	startContainer();
+// }
+	
+
+// This function starts the quiz by starting the questions and timer
 function startQuiz() {
-	startButton.style.display = 'none'
+	startContainer.style.display = 'none'
 	console.log("I called the start quiz function")
 	showQuestion();
 	startTimer();
+	
 }
 startButton.addEventListener('click', startQuiz);
 
 
 function showQuestion() {
+	
 	var question = quizData[currentQuestion];
 	questionElement.textContent = question.question;
 	optionButtons.forEach((button, index) => {
@@ -107,47 +115,66 @@ function startTimer() {
 	}, 1000);
 }
 
-
-function endQuiz() {
-	clearInterval(countdown);
-	
-			
-// area that stops quiz and removes questions
-// add coincactation after quizover by adding a plus sign plus whatever text i want to use ex All Done....
-// hide submit to end of quiz and once clicked hide it again = display none
-	quizContainer.innerHTML="quizOver" 
-
-// 	quizContainer.innerHTML = `
-// 		<h2>All done!</h2> 
-// 		<p> Your final score is
-// 		${score} out of ${quizData.length}!</h2>
-		
-		
-// 		enterInitials.addEventListener("click", function(event) {
-// 			event.preventDefault();
-// 		<div>
-// 		<button onclick="location.reload()">Go Back</button>
-		
-// 		</div>
-// 	`;
- }
-function submitInitials () {
-
-
+var inputContainer = document.querySelector("#input-group");
 var initialsInput = document.querySelector("#initials");
+
+
+// function that will trigger at the end of the quiz
+function endQuiz() {
+	quizContainer.style.display = 'none'
+	clearInterval(countdown);
+	inputContainer.innerHTML= "";
+
+	addInitialsForm () 
+}
+
+// form that shows when function endQuiz() triggers this form is submitted to the High Scores page
+function addInitialsForm () {
+	// creATE
+	var h2 =document.createElement('h2');
+	var p =document.createElement('p');
+	var button =document.createElement('button')
+	var label = document.createElement ('label')
+	var input = document.createElement('input')
+	// MODIFY
+	h2.textContent='All Done!';
+	p.textContent=`Your final score is a ${score} out of 7`;
+	button.setAttribute('id', 'submit');
+	button.textContent='submit';
+	label.setAttribute ('id','label');
+	label.textContent ='Enter Initials';
+	input.setAttribute ('id','input');
+	// APPEND
+	inputContainer.appendChild(h2);
+	inputContainer.appendChild(p);
+	inputContainer.appendChild(button);
+	inputContainer.appendChild(label);
+	inputContainer.appendChild(input);
+
+	// button.addEventListener ('click',submitInitials)
+
+	// create input box for iniitials then append
+	// submitButton.addEventListener('click', submitInitials);
+
+}
+
+// Once the submit button is hit the highscores.html page will be triggered
+// The high score is saved to local storage
+
+function submitInitials () {
 
 		// enterInitials.addEventListener("click", function(event) {
 		// 	event.preventDefault();
 
- 		var user = {
-				initials: initialsInput.value.trim(),
- 			  };
-			   console.log("user", user)
-		  localStorage.setItem("user", JSON.stringify(user));
+//  		var user = {
+// 				initials: initialsInput.value.trim(),
+//  			  };
+// 			   console.log("user", user)
+// 		  localStorage.setItem("user", JSON.stringify(user));
 
 		
-}
-submitButton.addEventListener('click', submitInitials);
+// }
 
 // startQuiz();
 
+}

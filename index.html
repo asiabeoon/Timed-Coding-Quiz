@@ -17,41 +17,54 @@
         <div id="timer"></div>
             <!-- Time <span id ="countdown">0</span> -->
         </div>
-       
-        <div>
-        <h1>Timed Coding Quiz Challenge</h1>
-            <p>
-                Try to answer the following code-related questions within the time limit. Keep in mind that incorrect
-                answers will penalize your score by ten seconds.
-            </p>
-       
-       <button id="start-btn" class="start">Start Quiz</button>
-        </div>
+        
+        <div class="start-container" id="start-page">
+           
+            <h1>Timed Coding Quiz Challenge</h1>
+                <p>
+                    Try to answer the following code-related questions within the time limit. Keep in mind that incorrect
+                    answers will penalize your score by ten seconds.
+                </p>
+               
+               <button id="start-btn" class="start">Start Quiz</button>
+               
+          </div>
+
+        
+
     </header>
   
     <main>
     
 <!-- Build a function when a user press start button quiz starts -->
 
-<div id ="quiz" class="container">
+        <div id ="quiz" class="quiz-container">
 
-    <p id="question"></p>
-    <div id="options">
-        <button id="option1"><span id="option2"></span></button>
-        <button id="option2"><span id="option2"></span></button>
-        <button id="option3"><span id="option2"></span></button>
-        <button id="option4"><span id="option2"></span></button>
-    </div>
-</div> 
+        <p id="question"></p>
+        <div id="options">
+            <button id="option1"><span id="option2"></span></button>
+            <button id="option2"><span id="option2"></span></button>
+            <button id="option3"><span id="option2"></span></button>
+            <button id="option4"><span id="option2"></span></button>
+        </div>
+        </div> 
 
-<!-- Make this button trigger at end of -->
-<button id="submit">Submit</button>
+<!--*Make this button submit Initials to local storage* -->
+
+
     </main>
 
-    <div class="input-group">
-        <label for="initials">Enter Initials </label>
-        <input type="text" name="initials" id="initials" placeholder="" />
-      </div>
+        
+        
+        <div id= "input-group" class= "input-container">
+            <!-- <h2>All done!</h2> 
+             -->
+            <!-- <label for="initials">Enter Initials </label> -->
+            <!-- <input type="text" name="initials" id="initials" placeholder="" /> -->
+
+            <!-- <button id="submit">Submit</button> -->
+        </div>
+
 <script src="./assets/script.js"></script>
 
 </body>
