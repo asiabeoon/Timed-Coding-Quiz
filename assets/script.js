@@ -56,9 +56,8 @@ var submitButton = document.getElementById('submit');
 
 let currentQuestion = 0;
 let score = 0;
-let timeLeft = 60;
+let timeLeft =  60;
 let countdown;
-
 
 
 // *Attempted funtion to not display input container on start page*
@@ -78,7 +77,7 @@ function startQuiz() {
 }
 startButton.addEventListener('click', startQuiz);
 
-
+// This function shows the questions
 function showQuestion() {
 	
 	var question = quizData[currentQuestion];
@@ -89,7 +88,7 @@ function showQuestion() {
 	});
 }
 
-
+// This function presents the 4 option buttons for answers
 function selectOption(event) {
 	var selectedButton = event.target;
 	var answer = quizData[currentQuestion].answer;
@@ -104,15 +103,24 @@ function selectOption(event) {
 	}
 }
 
+// This function starts the timer remember the quoted text is what's seen on the page the 
+// plus sign the variable timeLeft 
 function startTimer() {
-	timerElement.textContent = timeLeft;
+	timerElement.textContent = 'Timer ' + timeLeft;
 	countdown = setInterval(() => {
 		timeLeft--;
-		timerElement.textContent = timeLeft;
+		timerElement.textContent = 'Timer ' +  timeLeft;
 		if (timeLeft === 0) {
 			endQuiz();
 		}
 	}, 1000);
+}
+
+// *This function will reduce the time if the answer is incorrect 
+function reduceTime () {
+	 if (selectedButton.textContent != answer) {
+		(timeLeft - 5);
+	}
 }
 
 var inputContainer = document.querySelector("#input-group");
@@ -123,13 +131,19 @@ var initialsInput = document.querySelector("#initials");
 function endQuiz() {
 	quizContainer.style.display = 'none'
 	clearInterval(countdown);
+	
 	inputContainer.innerHTML= "";
+	
 
 	addInitialsForm () 
 }
 
 // form that shows when function endQuiz() triggers this form is submitted to the High Scores page
 function addInitialsForm () {
+
+// Used the example below to reduce score
+// document.getElementById("demo").innerHTML = Math.round(2.5);
+
 	// creATE
 	var h2 =document.createElement('h2');
 	var p =document.createElement('p');
@@ -138,7 +152,7 @@ function addInitialsForm () {
 	var input = document.createElement('input')
 	// MODIFY
 	h2.textContent='All Done!';
-	p.textContent=`Your final score is a ${score} out of 7`;
+	p.textContent=`Your final score is a ${Math.round(score/7)*100}`;
 	button.setAttribute('id', 'submit');
 	button.textContent='submit';
 	label.setAttribute ('id','label');
@@ -149,7 +163,7 @@ function addInitialsForm () {
 	inputContainer.appendChild(p);
 	inputContainer.appendChild(button);
 	inputContainer.appendChild(label);
-	inputContainer.appendChild(input);
+	inputContainer.appendChild(input-box);
 
 	// button.addEventListener ('click',submitInitials)
 
@@ -158,9 +172,8 @@ function addInitialsForm () {
 
 }
 
-// Once the submit button is hit the highscores.html page will be triggered
-// The high score is saved to local storage
-
+// Once the submit button is hit the highscores.html page
+// Add go back and Clear form buttons 
 function submitInitials () {
 
 		// enterInitials.addEventListener("click", function(event) {
@@ -174,6 +187,7 @@ function submitInitials () {
 
 		
 // }
+// submitButton.addEventListener('click', submitInitials);
 
 // startQuiz();
 
