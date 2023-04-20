@@ -2,37 +2,37 @@
 var quizData = [
     {
 		question: 'Which property is used to change the background color?',
-		options: ['background-color', 'bgcolor', 'color', 'backgroundcolor'],
+		qoptions: ['background-color', 'bgcolor', 'color', 'backgroundcolor'],
 		answer: 'background-color'
 	},
 	{
 		question: 'Inside which HTML element do we put the JavaScript?',
-		options: ['<js>>', '<scripting>', '<javascript>', '<script>'],
+		qoptions: ['<js>>', '<scripting>', '<javascript>', '<script>'],
 		answer: '<script>'
 	},
     {
 		question: 'Choose the correct HTML element for the largest heading:',
-		options: ['<heading>', '<h6>', '<h1>', '<head>'],
+		qoptions: ['<heading>', '<h6>', '<h1>', '<head>'],
 		answer: '<h1>'
 	},
 	{
 		question: 'How do you create a function in JavaScript?',
-		options: ['function:myFunction()', 'function myFunction', 'function= = myFunction()', 'function:myFunction;'],
+		qoptions: ['function:myFunction()', 'function myFunction', 'function= = myFunction()', 'function:myFunction;'],
 		answer: 'function myFunction'
 	},
     {
 		question: 'How can you make a numbered list?',
-		options: ['<ul>', '<list>', '<ol>', '<dl>'],
+		qoptions: ['<ul>', '<list>', '<ol>', '<dl>'],
 		answer: '<ol>'
 	},
 	{
 		question: 'How do you call a function named "myFunction"?',
-		options: ['myFunction()', 'call myFunction()', 'consolelog myFunction', 'call function myFunction'],
+		qoptions: ['myFunction()', 'call myFunction()', 'consolelog myFunction', 'call function myFunction'],
 		answer: 'myFunction()'
 	},
     {
 		question: 'Which property is used to change the font of an element?',
-		options: ['font-weight', 'font', 'font-style', 'font-family'],
+		qoptions: ['font-weight', 'font', 'font-style', 'font-family'],
 		answer: 'font-family'
 	}
 
@@ -54,27 +54,27 @@ var optionButtons = document.getElementById('options').querySelectorAll('button'
 var timerElement = document.getElementById('timer');
 var submitButton = document.getElementById('submit');
 
+// Variable for the ID Question box div
+var questionBox = document.getElementById('question-box');
+
 let currentQuestion = 0;
 let score = 0;
 let timeLeft =  60;
 let countdown;
-
-
-// *Attempted funtion to not display input container on start page*
-// function quizOpener () {
-// 	inputContainer.style.display = 'none'
-// 	startContainer();
-// }
 	
 
 // This function starts the quiz by starting the questions and timer
+
 function startQuiz() {
 	startContainer.style.display = 'none'
+// to remove the div questions from being hidden once the quiz begins
+	questionBox.classList.remove("hidden");
 	console.log("I called the start quiz function")
 	showQuestion();
 	startTimer();
 	
 }
+
 startButton.addEventListener('click', startQuiz);
 
 // This function shows the questions
@@ -83,7 +83,7 @@ function showQuestion() {
 	var question = quizData[currentQuestion];
 	questionElement.textContent = question.question;
 	optionButtons.forEach((button, index) => {
-		button.textContent = question.options[index];
+		button.textContent = question.qoptions[index];
 		button.addEventListener('click', selectOption);
 	});
 }
@@ -94,7 +94,13 @@ function selectOption(event) {
 	var answer = quizData[currentQuestion].answer;
 	if (selectedButton.textContent === answer) {
 		score++;
+	} else {
+		console.log("wrong")
+		console.log(timeLeft)
+		reduceTime();
+		console.log(timeLeft)
 	}
+
 	currentQuestion++;
 	if (currentQuestion >= quizData.length) {
 		endQuiz();
@@ -116,12 +122,14 @@ function startTimer() {
 	}, 1000);
 }
 
-// *This function will reduce the time if the answer is incorrect 
+// This function will reduce the time if the answer is wrong
 function reduceTime () {
-	 if (selectedButton.textContent != answer) {
-		(timeLeft - 5);
+
+// set timeLeft to be -5
+		timeLeft =  timeLeft - 5;
+		console.log(timeLeft)
 	}
-}
+
 
 var inputContainer = document.querySelector("#input-group");
 var initialsInput = document.querySelector("#initials");
@@ -152,7 +160,7 @@ function addInitialsForm () {
 	var input = document.createElement('input')
 	// MODIFY
 	h2.textContent='All Done!';
-	p.textContent=`Your final score is a ${Math.round(score/7)*100}`;
+	p.textContent=`Your final score is a ${Math.round((score/7)*100)}`;
 	button.setAttribute('id', 'submit');
 	button.textContent='submit';
 	label.setAttribute ('id','label');
@@ -163,12 +171,8 @@ function addInitialsForm () {
 	inputContainer.appendChild(p);
 	inputContainer.appendChild(button);
 	inputContainer.appendChild(label);
-	inputContainer.appendChild(input-box);
+	inputContainer.appendChild(input);
 
-	// button.addEventListener ('click',submitInitials)
-
-	// create input box for iniitials then append
-	// submitButton.addEventListener('click', submitInitials);
 
 }
 
@@ -179,11 +183,14 @@ function submitInitials () {
 		// enterInitials.addEventListener("click", function(event) {
 		// 	event.preventDefault();
 
-//  		var user = {
-// 				initials: initialsInput.value.trim(),
-//  			  };
-// 			   console.log("user", user)
-// 		  localStorage.setItem("user", JSON.stringify(user));
+ 		var user = {
+				initials: initialsInput.value.trim(),
+ 			  };
+			   console.log("user", user)
+		  localStorage.setItem("user", JSON.stringify(user));
+//   Don't forget to get Item from local storage
+// Use hidden and remove for Highscores
+// 
 
 		
 // }
