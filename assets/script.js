@@ -52,7 +52,7 @@ var optionButtons = document.getElementById('options').querySelectorAll('button'
 
 // Get the timer and submit elements
 var timerElement = document.getElementById('timer');
-var submitButton = document.getElementById('submit');
+// var submitButton = document.getElementById('submit');
 
 // Variable for the ID Question box div
 var questionBox = document.getElementById('question-box');
@@ -61,7 +61,7 @@ let currentQuestion = 0;
 let score = 0;
 let timeLeft =  60;
 let countdown;
-	
+
 
 // This function starts the quiz by starting the questions and timer
 
@@ -132,62 +132,95 @@ function reduceTime () {
 
 
 var inputContainer = document.querySelector("#input-group");
-var initialsInput = document.querySelector("#initials");
+// var initialsInput = document.querySelector("#input");
 
 
 // function that will trigger at the end of the quiz
 function endQuiz() {
 	quizContainer.style.display = 'none'
 	clearInterval(countdown);
-	
 	inputContainer.innerHTML= "";
-	
-
 	addInitialsForm () 
 }
 
 // form that shows when function endQuiz() triggers this form is submitted to the High Scores page
 function addInitialsForm () {
 
-// Used the example below to reduce score
-// document.getElementById("demo").innerHTML = Math.round(2.5);
-
 	// creATE
 	var h2 =document.createElement('h2');
 	var p =document.createElement('p');
-	var button =document.createElement('button')
-	var label = document.createElement ('label')
-	var input = document.createElement('input')
+	var label = document.createElement ('label');
+	var input = document.createElement('input');
+	var button =document.createElement('button');
 	// MODIFY
 	h2.textContent='All Done!';
 	p.textContent=`Your final score is a ${Math.round((score/7)*100)}`;
-	button.setAttribute('id', 'submit');
-	button.textContent='submit';
 	label.setAttribute ('id','label');
 	label.textContent ='Enter Initials';
 	input.setAttribute ('id','input');
+	button.setAttribute('id', 'submit');
+	button.textContent='SUBMIT';
+// bootstrap component for button appearance
+	button.classList= "btn btn-secondary";
 	// APPEND
 	inputContainer.appendChild(h2);
 	inputContainer.appendChild(p);
-	inputContainer.appendChild(button);
 	inputContainer.appendChild(label);
 	inputContainer.appendChild(input);
-
+	inputContainer.appendChild(button);
 
 }
 
-// Once the submit button is hit the highscores.html page
-// Add go back and Clear form buttons 
+// Variables for input box declared above
+// var inputContainer = document.querySelector("#input-group");
+// var initialsInput = document.querySelector("#input");
+
+	// var highScoresLink = document.getElementById('highScoreslink');
+ 	// highScoresLink.setAttribute("href","url");	
+	
+	// var highScoresList = document.querySelector('.initialsAndScores');
+
+	// Variable declared above var inputContainer = document.querySelector("#input-group");
+
 function submitInitials () {
 
+// inputContainer = form in most examples
+	var inputContainer = document.getElementById('input-group');
+	var input = document.getElementById('input');
+	var finalScore = $Math.round((score/7)*100);
+
+	var scoresInput=document.getElementById('initialsAndScores');
+
+
+		inputContainer.addEventListener('submit', function(event) {
+		event.preventDefault();
+
+		var inputValue = input.value;
+		var finalScoreValue = finalScore.value;
+
+		localStorage.setItem('initialsAndScores', inputValue);
+
+		localStorage.setItem('initialsAndScores', finalScoreValue );
+
+		window.location.href = "highscores.html";
+	})
+	initialsAndScores
+
+}	
+// projectFormEl.on('submit', handleProjectFormSubmit);
+	// button.addEventListener('click', storeHighScores);
+	
 		// enterInitials.addEventListener("click", function(event) {
 		// 	event.preventDefault();
+		
 
- 		var user = {
-				initials: initialsInput.value.trim(),
- 			  };
-			   console.log("user", user)
-		  localStorage.setItem("user", JSON.stringify(user));
+
+// variable to link to high score page 
+
+// var highScoresLink = document.getElementById('highScoreslink');
+// highScoresLink.setAttribute("href","url");	
+
+
 //   Don't forget to get Item from local storage
 // Use hidden and remove for Highscores
 // 
@@ -198,4 +231,3 @@ function submitInitials () {
 
 // startQuiz();
 
-}

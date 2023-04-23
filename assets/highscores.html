@@ -1,7 +1,35 @@
-<h2> High scores</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>High Scores Page</title>
+</head>
 
+<h2> High scores</h2>
+<!-- this ahref redirects go back button to the start page/index.html-->
 <div>
-    <button onclick="location.reload()">Go Back</button>
+    <a href="../index.html">  
+    <button id = "go-back">Go Back</button>
+    </a>
     
     <button id="clear">Clear High Scores</button>
+
+    <script>
+        // localStorage.removeItem("name of localStorage variable or item to remove");
+    </script>
 </div>
+
+<main>
+    <div id="initialsAndScores"  class="container">
+        <script> 
+          var input = localStorage.getItem('input');
+
+          document.getElementById('input').textContent = input;
+          
+        </script>       
+    </div> 
+</main>
+
+<script src="./script.js"
